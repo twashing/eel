@@ -46,7 +46,7 @@
 
   (plz 'post "https://api.openai.com/v1/chat/completions"
     :headers
-    '(("Authorization" . (concat "Bearer " eel-api-key))
+    `(("Authorization" . ,(concat "Bearer " eel-api-key))
       ("Content-Type" . "application/json"))
     :body (json-encode `(("model" . "gpt-3.5-turbo")
                          ("messages" . [(("role" . "user") ("content" . ,message))])))
@@ -61,7 +61,8 @@
     (save-excursion
       (goto-char end)
       (newline)
-      (insert message))))
+      (insert message)
+      (pulse-momentary-highlight-one-line))))
 
 (defun eel/send ()
   (interactive)
